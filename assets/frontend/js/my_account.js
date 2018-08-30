@@ -1,0 +1,19 @@
+$(document).on('click','#my_packs_top_menu li a',function(){content_type=this.id;if(content_type=='mockTest')
+no_of_item=dlb_pkg_mocktest;if(content_type=='sectionalTest')
+no_of_item=dlb_pkg_sectionaltest;if(content_type=='pyp')
+no_of_item=dlb_pkg_pyp;if(content_type=='tbsp')
+no_of_item=dlb_pkg_tbsp;dlb_pkg_id=dlb_pkg_id;if(content_type=='campdf'||content_type=='preparation')
+return true;if(mathod_name=='my_pack_test'||mathod_name=='exam_series'){show_package_content(content_id,content_type,no_of_item,exam_slug,frontend_url+'show-package-content-test',dlb_pkg_id);}else{show_package_content(content_id,content_type,no_of_item,exam_slug,frontend_url+'show-package-content',dlb_pkg_id);}});function show_package_content(content_id,content_type,no_of_item,exam_slug,url,dlb_pkg_id)
+{var content_id=content_id;var content_type=content_type;var no_of_item=no_of_item;var exam_slug=exam_slug;var url=url;var dlb_pkg_id=dlb_pkg_id;$.ajax({type:'POST',url:url,data:{content_id:content_id,content_type:content_type,dlb_pkg_id:dlb_pkg_id,no_of_item:no_of_item,exam_slug:exam_slug,pre:get_pre,como:get_como},beforeSend:function(){NProgress.start();},success:function(html){NProgress.done();$("#my_packs_top_menu li").attr('class','deactive_pre');$("#"+content_type).closest('li').attr('class','active_pre');if(html!=='')
+{$("#package_content").html(html);}else{$("#package_content").html('Not available now! Coming Soon');}
+get_timerclass();}});}
+$(function(){var content_type=$('#my_packs_top_menu li:first a').attr('id');if(content_type=='mockTest')
+no_of_item=dlb_pkg_mocktest;if(content_type=='sectionalTest')
+no_of_item=dlb_pkg_sectionaltest;if(content_type=='pyp')
+no_of_item=dlb_pkg_pyp;if(content_type=='tbsp')
+no_of_item=dlb_pkg_tbsp;dlb_pkg_id=dlb_pkg_id;if(content_type=='campdf'||content_type=='preparation')
+return true;if(mathod_name=='my_pack_test'||mathod_name=='exam_series'){show_package_content(content_id,content_type,no_of_item,exam_slug,frontend_url+'show-package-content-test',dlb_pkg_id);}else{show_package_content(content_id,content_type,no_of_item,exam_slug,frontend_url+'show-package-content',dlb_pkg_id);}});function get_timerclass(){var loop=$('.starttimer').length;for(var i=0;i<parseInt(loop);i++){var id='closetimer-'+(i+1);count(id,'');}}
+function count(id,lasttime){var startTime=$('#'+id+' .have_start_in span').html();var pieces=startTime.split(":");var days=pieces[0].split(' ');var hrs=pieces[1].split(' ');var mins=pieces[2].split(' ');var sec=pieces[3].split(' ');var time=new Date();time.setHours(hrs[1]);time.setMinutes(mins[1]);time.setSeconds(sec[1]);var timedif=new Date(time.valueOf()-1000);var newtime=timedif.toTimeString().split(" ")[0];var pieces1=newtime.split(":");var hrs1=pieces1[0].split(' ');var mins1=pieces1[1].split(' ');var sec1=pieces1[2].split(' ');if(parseInt(hrs1)==0&&parseInt(mins1)==0&&parseInt(sec1)==0&&parseInt(days[0])>0){days[0]=parseInt(days[0])-1;if(days[0]<10){days[0]='0'+days[0];}}
+if(parseInt(hrs1)==0&&parseInt(mins1)==0&&parseInt(sec1)==0&&parseInt(days[0])==0){var ins=$('#'+id).attr('data-bind');$('#'+id+' .have_start_in').html('<a class="sm_btn" href="'+frontend_url+'paid-test/instruction.html?q='+ins+'">Start Now<i class="fa fa-play" aria-hidden="true"></i></a>')
+var end=$('#'+id+' .time_display').html().split('to');$('#'+id+' .time_display').html('End Date: '+end[1].trim());$('#'+id+' .have_start_in').removeClass('have_start_in');$('#'+id).attr('id','');return false;}
+var finaltime=days[0]+' Days : '+hrs1+' Hours : '+mins1+' Min : '+sec1+' Sec';$('#'+id+' .have_start_in span').html(finaltime);setTimeout(function(){count(id,startTime);},1000);}
